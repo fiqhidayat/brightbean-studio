@@ -25,16 +25,12 @@ services:
     restart: unless-stopped
 
   caddy:
-    image: caddy:alpine
+    image: caddy:2-alpine
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - type: bind
-        source: ./Caddyfile
-        target: /etc/caddy/Caddyfile
-        read_only: true
-      - media_data:/app/media:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
