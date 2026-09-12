@@ -33,6 +33,7 @@ services:
     volumes:
       - caddy_data:/data
       - caddy_config:/config
+      - media_data:/app/media:ro
     depends_on:
       - app
     restart: unless-stopped
