@@ -1,4 +1,14 @@
 {$APP_DOMAIN:localhost} {
-    reverse_proxy app:8000
     encode gzip
+
+    # Handle media files secara langsung dari volume
+    handle /media/* {
+        root * /app
+        file_server
+    }
+
+    # Proxy sisa traffic ke container Django app
+    handle {
+        reverse_proxy app:8000
+    }
 }
